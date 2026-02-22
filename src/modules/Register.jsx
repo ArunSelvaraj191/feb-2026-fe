@@ -13,8 +13,18 @@ import { useNavigate } from "react-router-dom";
 const Register = () => {
   const navigate = useNavigate();
   const [registerData, setRegisterData] = useState(null);
-  const handleSubmit = () => {
+  console.log(import.meta.env.VITE_BE_URL);
+  const handleSubmit = async () => {
     console.log("registerData =>", registerData);
+    const response = await axios.post(
+      `${import.meta.env.VITE_BE_URL}/auth/register`,
+      registerData,
+    );
+    if (response.status === 201) {
+      setRegisterData(null);
+      navigate("/");
+    }
+    console.log("Response =>", response);
   };
   const handleChange = (event) => {
     setRegisterData((prev) => ({
@@ -55,6 +65,7 @@ const Register = () => {
             label="Username"
             variant="outlined"
             name="username"
+            value={registerData?.username || ""}
             // fullWidth
             margin="normal"
             placeholder="Enter your Username"
@@ -66,6 +77,7 @@ const Register = () => {
             label="Email"
             variant="outlined"
             name="email"
+            value={registerData?.email || ""}
             // fullWidth
             margin="normal"
             placeholder="Enter your Email"
@@ -78,6 +90,7 @@ const Register = () => {
             variant="outlined"
             type="password"
             name="password"
+            value={registerData?.password || ""}
             // fullWidth
             margin="normal"
             placeholder="Enter your Password"

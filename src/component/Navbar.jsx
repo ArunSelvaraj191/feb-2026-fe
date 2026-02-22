@@ -1,7 +1,9 @@
 import { AppBar, Button, Toolbar } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   return (
     <AppBar position="static">
       <Toolbar>
@@ -13,6 +15,9 @@ const Navbar = () => {
         </Button>
         <Button color="inherit" component={Link} to="/skills">
           Skills
+        </Button>
+        <Button color="inherit" component={Link} to="/users">
+          Users
         </Button>
       </Toolbar>
     </AppBar>

@@ -6,6 +6,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
+import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "../ThemeContext";
@@ -18,8 +19,19 @@ const Login = () => {
   console.log("theme =>", theme);
 
   const [loginData, setLoginData] = useState(null);
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log("loginData =>", loginData);
+    const response = await axios.post(
+      `${import.meta.env.VITE_BE_URL}/auth/login`,
+      loginData,
+    );
+    console.log("Response =>", response);
+    if (response.status === 200) {
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("user", JSON.stringify(response.data.user));
+      setLoginData(null);
+      navigate("/portfolio");
+    }
   };
   const handleChange = (event) => {
     setLoginData((prev) => ({

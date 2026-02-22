@@ -7,6 +7,7 @@ import Portfiolio from "./modules/Portfolio";
 import Projects from "./modules/Projects";
 import Register from "./modules/Register";
 import Skills from "./modules/Skills";
+import Users from "./modules/Users";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -22,6 +23,7 @@ function App() {
         <Route path="/portfolio" element={<Portfiolio />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/skills" element={<Skills />} />
+        <Route path="/users" element={<Users />} />
       </Routes>
     </BrowserRouter>
   );
